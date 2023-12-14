@@ -117,31 +117,34 @@
 
 		const categoryClick = () => {
 			const inputValue = document.getElementById('inputCategory').value;
-			const alertPlaceholderCategory = document.getElementById('liveAlertPlaceholderCategory')
-			const appendAlertCategory = (message, type) => {
-				const wrapper = document.createElement('div')
-				wrapper.innerHTML = [
-					`<div class="alert alert-${type} alert-dismissible" role="alert">`,
-					`   <div>${message}</div>`,
-					'   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-					'</div>'
-				].join('')
+			if (inputValue != '') {
+				const alertPlaceholderCategory = document.getElementById('liveAlertPlaceholderCategory')
+				const appendAlertCategory = (message, type) => {
+					const wrapper = document.createElement('div')
+					wrapper.innerHTML = [
+						`<div class="alert alert-${type} alert-dismissible" role="alert">`,
+						`   <div>${message}</div>`,
+						'   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+						'</div>'
+					].join('')
 
-				alertPlaceholderCategory.append(wrapper)
-			}
-			const ul = document.querySelector('#categoryDropdown');
-			const liItems = ul.querySelectorAll('li');
-			let isFound = false;
-			liItems.forEach(li => {
-				if (li.innerText == inputValue) {
-					isFound = true;
+					alertPlaceholderCategory.append(wrapper)
 				}
-			});
-			if (isFound) {
-				appendAlertCategory('登録済みです', 'danger')
-			} else {
-				window.location.href = "/editCategory/" + inputValue;
+				const ul = document.querySelector('#categoryDropdown');
+				const liItems = ul.querySelectorAll('li');
+				let isFound = false;
+				liItems.forEach(li => {
+					if (li.innerText == inputValue) {
+						isFound = true;
+					}
+				});
+				if (isFound) {
+					appendAlertCategory('登録済みです', 'danger')
+				} else {
+					window.location.href = "/editCategory/" + inputValue;
+				}
 			}
+
 		}
 	</script>
 </head>
