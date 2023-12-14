@@ -140,63 +140,65 @@
 	<div class="reviewContainer">
 		<br>
 		<form th:action="@{/review}" method="POST" name="form1" id="form1" enctype="multipart/form-data">
-			<div class="col-sm-7">
-				<label for="title"><b><span style="color: red;">*</span>タイトル：</b></label>
-				<input type="text" placeholder="タイトルを入力…" name="title" class="form-control" required>
-			</div>
-			<br>
-			<label for="genre"><b><span style="color: red;">*</span>ジャンル：</b></label>
-			<div class="col-sm-7">
-				<div class="input-group mb-3">
-					<input type="text" placeholder="カテゴリーを入力…" name="category" class="form-control"
-						aria-label="Text input with dropdown button" id="inputCategory" required>
-					<button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-						aria-expanded="false">選択</button>
-					<ul class="dropdown-menu dropdown-menu-end">
-						<th:block th:each="category:${categoryList}">
-							<li><a class="dropdown-item" th:text="${category.Category}"
-									th:onclick="|categoryClick('__${category.Category}__')|"></a></li>
-						</th:block>
-
-
-					</ul>
+			<fieldset>
+				<div class="col-sm-7">
+					<label for="title"><b><span style="color: red;">*</span>タイトル：</b></label>
+					<input type="text" placeholder="タイトルを入力…" name="title" class="form-control" required>
 				</div>
-			</div>
-			<br>
-			<div class="col-sm-7">
-				<label for="exampleFormControlTextarea1" class="form-label"><b><span
-							style="color: red;">*</span>コメント：</b></label>
-				<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"
-					placeholder="コメントを入力…" required style="resize: none;"></textarea>
-			</div>
-			<br>
-			<label class="form-label"><b>レビュー数：</b></label>
-			<div class="stars col-sm-7">
-				<span>
-					<input id="review01" type="radio" name="review"><label for="review01" id="r1">★</label>
-					<input id="review02" type="radio" name="review"><label for="review02" id="r2">★</label>
-					<input id="review03" type="radio" name="review"><label for="review03" id="r3">★</label>
-					<input id="review04" type="radio" name="review"><label for="review04" id="r4">★</label>
-					<input id="review05" type="radio" name="review"><label for="review05" id="r5">★</label>
-				</span>
-			</div>
-			<br>
-			<div class="col-sm-7">
-				<label for="formFileMultiple" class="form-label"><b><span
-							style="color: red;">*</span>画像：</b></label><br>
-				<label for="icon-image" id="iconlabel">画像を設定</label>
 				<br>
-				<input type="file" name="image" id="icon-image">
-				<span class="select-image" id="unset">設定されていません</span><br>
-				<img id="iconimg" class="mainimg">
-			</div>
-			<br>
-			<label><b>公開：</b></label>
-			<div class="form-check form-switch">
-				<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-				<label class="form-check-label" for="flexSwitchCheckDefault"></label>
-			</div>
-			<br>
+				<label for="genre"><b><span style="color: red;">*</span>ジャンル：</b></label>
+				<div class="col-sm-7">
+					<div class="input-group mb-3">
+						<input type="text" placeholder="カテゴリーを入力…" name="category" class="form-control"
+							aria-label="Text input with dropdown button" id="inputCategory" required>
+						<button class="btn btn-outline-secondary dropdown-toggle" type="button"
+							data-bs-toggle="dropdown" aria-expanded="false">選択</button>
+						<ul class="dropdown-menu dropdown-menu-end">
+							<th:block th:each="category:${categoryList}">
+								<li><a class="dropdown-item" th:text="${category.Category}"
+										th:onclick="|categoryClick('__${category.Category}__')|"></a></li>
+							</th:block>
+
+
+						</ul>
+					</div>
+				</div>
+				<br>
+				<div class="col-sm-7">
+					<label for="exampleFormControlTextarea1" class="form-label"><b><span
+								style="color: red;">*</span>コメント：</b></label>
+					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"
+						placeholder="コメントを入力…" required style="resize: none;"></textarea>
+				</div>
+				<br>
+				<label class="form-label"><b>レビュー数：</b></label>
+				<div class="stars col-sm-7">
+					<span>
+						<input id="review01" type="radio" name="review"><label for="review01" id="r1">★</label>
+						<input id="review02" type="radio" name="review"><label for="review02" id="r2">★</label>
+						<input id="review03" type="radio" name="review"><label for="review03" id="r3">★</label>
+						<input id="review04" type="radio" name="review"><label for="review04" id="r4">★</label>
+						<input id="review05" type="radio" name="review"><label for="review05" id="r5">★</label>
+					</span>
+				</div>
+				<br>
+				<div class="col-sm-7">
+					<label for="formFileMultiple" class="form-label"><b><span
+								style="color: red;">*</span>画像：</b></label><br>
+					<label for="icon-image" id="iconlabel">画像を設定</label>
+					<br>
+					<input type="file" name="image" id="icon-image">
+					<span class="select-image" id="unset">設定されていません</span><br>
+					<img id="iconimg" class="mainimg">
+				</div>
+				<br>
+				<label><b>公開：</b></label>
+				<div class="form-check form-switch">
+					<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+					<label class="form-check-label" for="flexSwitchCheckDefault"></label>
+				</div>
+				<br>
+			</fieldset>
 			<div>
 				<input type="submit" class="btn btn-primary" onclick="reviewClick(event);" value="投稿">
 			</div>

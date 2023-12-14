@@ -82,7 +82,7 @@ public class ReviewController {
 
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
 	public String check(RedirectAttributes redirectattribute, String userId, String password) throws IOException {
-		int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM user WHERE UserID = ?", Integer.class, userId);
+		int count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM user WHERE UserID = ? AND Password = ?", Integer.class, userId,password);
 		if (count == 0) {
 			redirectattribute.addFlashAttribute("error", 1);
 			return "redirect:/login";
