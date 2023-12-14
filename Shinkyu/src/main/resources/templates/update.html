@@ -67,7 +67,7 @@
 
 		}
 		const reviewClick = (e) => {
-			e.preventDefault();
+			document.getElementById('hiddenInput').innerHTML = '';
 			let count = 0;
 			for (let i = 1; i <= 5; i++) {
 				let elColored = document.getElementById('r' + i);
@@ -77,21 +77,22 @@
 				}
 			}
 			let element1 = document.createElement('input');
+			element1.id = "element1";
 			element1.type = "hidden";
 			element1.name = "reviewNum";
 			element1.value = count;
-			document.getElementById('form1').append(element1);
+			document.getElementById('hiddenInput').append(element1);
 			let open = document.getElementById('flexSwitchCheckDefault');
 			let element2 = document.createElement('input');
 			element2.type = "hidden";
 			element2.name = "open";
+			element2.id = "element2";
 			if (open.checked) {
 				element2.value = 1;
 			} else {
 				element2.value = 0;
 			}
-			document.getElementById('form1').append(element2);
-			document.forms.form1.submit();
+			document.getElementById('hiddenInput').append(element2);
 		}
 		const categoryClick = (category) => {
 			document.getElementById('inputCategory').value = category;
@@ -193,7 +194,7 @@
 								style="color: red;">*</span>画像：</b></label><br>
 					<label for="icon-image" id="iconlabel">画像を設定</label>
 					<br>
-					<input type="file" name="image" id="icon-image">
+					<input type="file" name="image" id="icon-image" required>
 					<span class="select-image" id="unset">設定されていません</span><br>
 					<img id="iconimg" class="mainimg">
 				</div>
@@ -204,6 +205,7 @@
 					<label class="form-check-label" for="flexSwitchCheckDefault"></label>
 				</div>
 				<br>
+				<div id="hiddenInput"></div>
 				<div>
 					<input type="submit" class="btn btn-primary" onclick="reviewClick(event);" value="編集">
 				</div>
