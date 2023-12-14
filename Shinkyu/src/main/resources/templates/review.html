@@ -67,7 +67,7 @@
 
 		}
 		const reviewClick = (e) => {
-			e.preventDefault();
+			document.getElementById('hiddenInput').innerHTML = '';
 			let count = 0;
 			for (let i = 1; i <= 5; i++) {
 				let elColored = document.getElementById('r' + i);
@@ -77,21 +77,22 @@
 				}
 			}
 			let element1 = document.createElement('input');
+			element1.id = "element1";
 			element1.type = "hidden";
 			element1.name = "reviewNum";
 			element1.value = count;
-			document.getElementById('form1').append(element1);
+			document.getElementById('hiddenInput').append(element1);
 			let open = document.getElementById('flexSwitchCheckDefault');
 			let element2 = document.createElement('input');
 			element2.type = "hidden";
 			element2.name = "open";
+			element2.id = "element2";
 			if (open.checked) {
 				element2.value = 1;
 			} else {
 				element2.value = 0;
 			}
-			document.getElementById('form1').append(element2);
-			document.forms.form1.submit();
+			document.getElementById('hiddenInput').append(element2);
 		}
 		const categoryClick = (category) => {
 			document.getElementById('inputCategory').value = category;
@@ -199,6 +200,7 @@
 				</div>
 				<br>
 			</fieldset>
+			<div id="hiddenInput"></div>
 			<div>
 				<input type="submit" class="btn btn-primary" onclick="reviewClick(event);" value="投稿">
 			</div>
