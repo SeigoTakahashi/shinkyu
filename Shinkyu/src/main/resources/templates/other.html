@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="description" content="" />
+	<meta name="author" content="" />
+	<title>My Review</title>
+	<!-- Favicon-->
+	<link rel="icon" type="image/x-icon" th:href="@{/assets/favicon.ico}" />
+	<!-- Bootstrap icons-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+	<!-- Core theme CSS (includes Bootstrap)-->
+	<link th:href="@{/css/styles.css}" rel="stylesheet" />
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<script>
+		const login = (e) => {
+			const value = sessionStorage.getItem('login');
+			if (value == 1) {
+				e.preventDefault();
+				Swal.fire({
+					type: "info",
+					title: "ログイン",
+					text: "ログイン中です",
+					confirmButtonColor: '#3CB371',
+				})
+			} else {
+				window.location.href = e.target.href;
+			}
+		}
+		const logout = (e) => {
+			const value = sessionStorage.getItem('login');
+			if (value == 1) {
+				e.preventDefault();
+				Swal.fire({
+					type: "question",
+					title: "ログアウト",
+					text: "ログアウトしますか？",
+					confirmButtonColor: '#3CB371',
+					showCancelButton: true
+				}).then(function (result) {
+					if (result.value) {
+						sessionStorage.removeItem('login');
+						window.location.href = e.target.href;
+					}
+
+				});
+			} else {
+				e.preventDefault();
+				Swal.fire({
+					type: "info",
+					title: "ログイン",
+					text: "ログインしてください",
+					confirmButtonColor: '#3CB371',
+				}).then(function (result) {
+					if (result.value) {
+						window.location.href = e.target.href;
+					}
+
+				});
+			}
+
+		}
+		const idClick = () => {
+			const inputValue = document.getElementById('inputId').value;
+			window.location.href = "/editId/" + inputValue;
+		}
+
+		const genderClick = () => {
+			const alertPlaceholderGender = document.getElementById('liveAlertPlaceholderGender')
+			const appendAlertGender = (message, type) => {
+				const wrapper = document.createElement('div')
+				wrapper.innerHTML = [
+					`<div class="alert alert-${type} alert-dismissible" role="alert">`,
+					`   <div>${message}</div>`,
+					'   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+					'</div>'
+				].join('')
+
+				alertPlaceholderGender.append(wrapper)
+			}
+			const inputValue = document.getElementById('inputGender').value;
+			if (!(inputValue == "男性" || inputValue == "女性")) {
+				appendAlertGender('不正な値です', 'danger')
+			} else {
+				window.location.href = "/editGender/" + inputValue;
+			}
+		}
+
+		const birthdayClick = () => {
+			const inputValue = document.getElementById('inputBirthday').value;
+			const alertPlaceholderBirthday = document.getElementById('liveAlertPlaceholderBirthday')
+			const appendAlertBirthday = (message, type) => {
+				const wrapper = document.createElement('div')
+				wrapper.innerHTML = [
+					`<div class="alert alert-${type} alert-dismissible" role="alert">`,
+					`   <div>${message}</div>`,
+					'   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+					'</div>'
+				].join('')
+
+				alertPlaceholderBirthday.append(wrapper)
+			}
+
+			const pattern = /^\d{4}-\d{2}-\d{2}$/;
+			if (!(pattern.test(inputValue))) {
+				appendAlertBirthday('不正な値です', 'danger')
+			} else {
+				window.location.href = "/editBirthday/" + inputValue;
+			}
+		}
+
+		const categoryClick = () => {
+			const inputValue = document.getElementById('inputCategory').value;
+			const alertPlaceholderCategory = document.getElementById('liveAlertPlaceholderCategory')
+			const appendAlertCategory = (message, type) => {
+				const wrapper = document.createElement('div')
+				wrapper.innerHTML = [
+					`<div class="alert alert-${type} alert-dismissible" role="alert">`,
+					`   <div>${message}</div>`,
+					'   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+					'</div>'
+				].join('')
+
+				alertPlaceholderCategory.append(wrapper)
+			}
+			const ul = document.querySelector('#categoryDropdown');
+			const liItems = ul.querySelectorAll('li');
+			let isFound = false;
+			liItems.forEach(li => {
+				if (li.innerText == inputValue) {
+					isFound = true;
+				}
+			});
+			if (isFound) {
+				appendAlertCategory('登録済みです', 'danger')
+			} else {
+				window.location.href = "/editCategory/" + inputValue;
+			}
+		}
+
+
+
+		const followClick = (followUserId) => {
+			const btnCheck1 = document.getElementById("btncheck1");
+			const text = document.getElementById("text");
+			if (btnCheck1.checked) {
+				text.innerText = "フォロー中";
+			} else {
+				text.innerText = "フォローする";
+			}
+			window.location.href = "/follow/" + followUserId;
+		}
+
+	</script>
+</head>
+
+<body>
+	<!-- Navigation-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container px-4 px-lg-5">
+			<a class="navbar-brand" th:href="@{/index}">My Review</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+				data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+					<li class="nav-item"><a class="nav-link" aria-current="page" th:href="@{/index}">Home</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/review}">Review</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/mypage}">MyPage</a></li>
+				</ul>
+				<ul class="navbar-nav">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" th:href="@{/user}" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							User
+						</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{/account}">Account</a>
+							<a class="dropdown-item" th:href="@{/likes}">Likes</a>
+							<a class="dropdown-item" th:href="@{/follows}">Follows</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" th:href="@{/login}" onclick="login(event)">Login</a>
+							<a class="dropdown-item" th:href="@{/logout}" onclick="logout(event)">Logout</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<h2 class="titleheader">Other</h2>
+	<!-- Header-->
+	<div class="box27">
+		<th:block th:each="user : ${userInfo}">
+			<div class="left">
+				<img th:src="${user.Icon}" width="40%">
+				<h2 th:text="${user.UserID}"></h2>
+				<span th:text="${follow}" style="font-weight: bold;"></span><span>フォロー</span>
+				<span th:text="${follower}" style="font-weight: bold;"></span><span>フォロワー</span><br><br>
+				<th:block th:if="${#lists.contains(followList, user.UserID)}">
+					<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+						<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"
+							th:onchange="|followClick('__${user.UserID}__')|" checked>
+						<label class="btn btn-outline-primary" for="btncheck1" id="text">フォロー中</label>
+					</div>
+				</th:block>
+				<th:block th:if="!${#lists.contains(followList, user.UserID)}">
+					<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+						<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"
+							th:onchange="|followClick('__${user.UserID}__')|">
+						<label class="btn btn-outline-primary" for="btncheck1" id="text">フォローする</label>
+					</div>
+				</th:block>
+
+			</div>
+			<div class="right">
+
+
+				<div class="profile">
+					<th:block th:if="${user.Gender == true}">
+						<div class="input-group flex-nowrap">
+							<span class="input-group-text " id="addon-wrapping">性別</span>
+							<input type="text" class="form-control" placeholder="男性or女性" aria-label="Username"
+								aria-describedby="addon-wrapping" value="男性" style="font-weight : bold ;"
+								name="afterGender" id="inputGender" readonly>
+<!--							<button type="button" class="btn btn-outline-secondary" id="liveAlertBtnGender"-->
+<!--								onclick="genderClick();">&#128393;</button>-->
+						</div>
+						<div class="alertMessage" id="liveAlertPlaceholderGender"></div>
+					</th:block>
+					<th:block th:if="${user.Gender == false}">
+						<div class="input-group flex-nowrap">
+							<span class="input-group-text" id="addon-wrapping">性別</span>
+							<input type="text" class="form-control" placeholder="男性or女性" aria-label="Username"
+								aria-describedby="addon-wrapping" value="女性" style="font-weight : bold ;"
+								name="afterGender" id="inputGender" readonly>
+<!--							<button type="button" class="btn btn-outline-secondary" id="liveAlertBtnGender"-->
+<!--								onclick="genderClick();">&#128393;</button>-->
+						</div>
+						<div class="alertMessage" id="liveAlertPlaceholderGender"></div>
+					</th:block>
+					<br>
+					<div class="input-group flex-nowrap">
+						<span class="input-group-text" id="addon-wrapping">誕生日</span>
+						<input type="text" class="form-control" placeholder="2000-01-01" aria-label="Username"
+							aria-describedby="addon-wrapping" th:value="${user.Birthday}" style="font-weight : bold ;"
+							name="afterBirthday" id="inputBirthday" readonly>
+<!--						<button type="button" class="btn btn-outline-secondary" id="liveAlertBtnBirthday"-->
+<!--							onclick="birthdayClick();">&#128393;</button>-->
+					</div>
+					<div class="alertMessage" id="liveAlertPlaceholderBirthday"></div>
+					<br>
+					<div class="input-group mb-3">
+						<span class="input-group-text" id="addon-wrapping">お気に入りカテゴリ</span>
+						<input type="text" class="form-control" aria-label="Text input with dropdown button"
+							placeholder="Category" style="font-weight : bold ;" name="afterCategory" id="inputCategory" readonly>
+<!--						<button type="button" class="btn btn-outline-secondary" id="liveAlertBtnBirthday"-->
+<!--							onclick="categoryClick();">＋</button>-->
+						<button class="btn btn-outline-secondary dropdown-toggle" type="button"
+							data-bs-toggle="dropdown" aria-expanded="false"></button>
+						<ul class="dropdown-menu dropdown-menu-end" id="categoryDropdown">
+							<th:block th:each="category : ${categoryList}">
+								<li th:text="${category.Category}" class="dropdown-item"></li>
+							</th:block>
+						</ul>
+					</div>
+					<div class="alertMessage" id="liveAlertPlaceholderCategory"></div>
+
+
+
+				</div>
+
+
+
+			</div>
+		</th:block>
+	</div>
+
+
+	<!-- Footer-->
+	<footer class="py-4 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p>
+		</div>
+	</footer>
+	<!-- Bootstrap core JS-->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<!-- Core theme JS-->
+	<script th:src="@{/js/scripts.js}"></script>
+</body>
+
+</html>
