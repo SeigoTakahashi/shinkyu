@@ -48,8 +48,7 @@ public class ReviewController {
 			return "index";
 		} else {
 			List<Map<String, Object>> reviewList = jdbcTemplate.queryForList(
-					"SELECT * FROM review INNER JOIN user ON review.UserID = user.UserID WHERE Open = true AND Category IN (SELECT Category FROM favorite WHERE UserID = ?);",
-					userId);
+					"SELECT * FROM review INNER JOIN user ON review.UserID = user.UserID WHERE Open = true;");
 			model.addAttribute("reviewList", reviewList);
 			List<Map<String, Object>> categoryList = jdbcTemplate.queryForList(
 					"SELECT DISTINCT(Category) FROM review WHERE Open = true AND Category IN (SELECT Category FROM favorite WHERE UserID = ?);",
