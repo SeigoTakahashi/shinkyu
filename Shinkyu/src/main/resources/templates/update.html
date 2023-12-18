@@ -97,6 +97,8 @@
 		const categoryClick = (category) => {
 			document.getElementById('inputCategory').value = category;
 		}
+
+
 	</script>
 
 </head>
@@ -195,13 +197,20 @@
 					<label for="icon-image" id="iconlabel">画像を設定</label>
 					<br>
 					<input type="file" name="image" id="icon-image" required>
+					<br>
 					<span class="select-image" id="unset">設定されていません</span><br>
 					<img id="iconimg" class="mainimg">
 				</div>
 				<br>
 				<label><b>公開：</b></label>
 				<div class="form-check form-switch">
-					<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+					<th:block th:if="${target.Open == true}">
+						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+							checked>
+					</th:block>
+					<th:block th:if="${target.Open == false}">
+						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+					</th:block>
 					<label class="form-check-label" for="flexSwitchCheckDefault"></label>
 				</div>
 				<br>

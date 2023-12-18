@@ -169,6 +169,7 @@
 		</button>
 		<ul class="dropdown-menu filter">
 			<li data-filter="all"><a class="dropdown-item">全て</a></li>
+			<li><a class="dropdown-item" th:href="@{/account}">カテゴリ追加</a></li>
 			<th:block th:each="category : ${categoryList}">
 				<li th:data-filter="${'.' + category.Category}"><a th:text="${category.Category}"
 						class="dropdown-item"></a>
