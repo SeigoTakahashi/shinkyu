@@ -607,6 +607,15 @@ html {
 .commentContainer {
 	position: relative;
 }
+
+.fbutton {
+	text-decoration: none;
+	color: black;
+}
+
+.fbutton:hover {
+	color:lightslategrey;
+}
 /* ----------------------------追加 -------------------------------------*/
 *,
 *::before,

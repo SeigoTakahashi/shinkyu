@@ -200,8 +200,8 @@
 			<div class="left">
 				<img th:src="${user.Icon}" width="40%">
 				<h2 th:text="${user.UserID}"></h2>
-				<span th:text="${follow}" style="font-weight: bold;"></span><span>フォロー</span>
-				<span th:text="${follower}" style="font-weight: bold;"></span><span>フォロワー</span><br><br>
+				<span th:text="${follow}" style="font-weight: bold;"></span><span><a th:href="@{'/followList/' + ${user.UserID}}" class="fbutton">フォロー</a></span>
+				<span th:text="${follower}" style="font-weight: bold;"></span><span><a th:href="@{'/followerList/' + ${user.UserID}}" class="fbutton">フォロワー</a></span><br><br>
 				<th:block th:if="${#lists.contains(followList, user.UserID)}">
 					<div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
 						<input type="checkbox" class="btn-check" id="btncheck1" autocomplete="off"

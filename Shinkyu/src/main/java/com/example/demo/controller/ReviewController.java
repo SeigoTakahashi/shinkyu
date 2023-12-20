@@ -450,5 +450,21 @@ public class ReviewController {
 		model.addAttribute("followList", followList.stream().map(m -> m.get("FollowUserID")).toList());
 		return "other";
 	}
+	
+	@RequestMapping(path = "/followList/{userId}", method = RequestMethod.GET)
+	public String followList(Model model,@PathVariable String userId) throws IOException {
+		List<Map<String, Object>> followList = jdbcTemplate.queryForList("SELECT * FROM follow INNER JOIN user ON follow.FollowUserID = user.UserID WHERE follow.UserID = ?",
+				userId);
+		model.addAttribute("followList", followList);
+		return "follow";
+	}
+	
+	@RequestMapping(path = "/followerList/{userId}", method = RequestMethod.GET)
+	public String followerList(Model model,@PathVariable String userId) throws IOException {
+		List<Map<String, Object>> followerList = jdbcTemplate.queryForList("SELECT * FROM follow INNER JOIN user ON follow.UserID = user.UserID WHERE follow.FollowUserID = ?",
+				userId);
+		model.addAttribute("followerList", followerList);
+		return "follower";
+	}
 
 }
