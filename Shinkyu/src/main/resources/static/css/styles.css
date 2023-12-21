@@ -616,6 +616,14 @@ html {
 .fbutton:hover {
 	color:lightslategrey;
 }
+
+.flist {
+	margin-bottom: 100px;
+}
+
+.fitem {
+	margin-bottom: 5px;
+}
 /* ----------------------------追加 -------------------------------------*/
 *,
 *::before,

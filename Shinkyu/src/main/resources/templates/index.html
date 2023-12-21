@@ -308,7 +308,7 @@
 																	<label for="message-text"
 																		class="col-form-label">Message:</label>
 																	<textarea class="form-control" id="message-text"
-																		style="resize: none;" name="reply" required></textarea>
+																		style="resize: none;" name="reply" maxlength="255" required></textarea>
 																	<input type="hidden" name="userId"
 																		th:value="${session.id}">
 																	<input type="hidden" name="reviewId"

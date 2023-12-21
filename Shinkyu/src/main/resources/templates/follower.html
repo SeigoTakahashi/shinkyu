@@ -161,11 +161,11 @@
 	<!-- Section-->
 	<div class="all_container">
 		<section class="py-5">
-			<div class="container px-4 px-lg-5 mt-5">
+			<div class="container px-4 px-lg-5 mt-5 flist">
 				<th:block th:each="follower:${followerList}">
-					<div style="margin-left: 33%;margin-right:33%; border: 1px solid lightgray;">
-						<img th:src="${follower.Icon}" width="80px" style="border-radius: 50%;">
-						<a th:text="${follower.UserID}" th:onclick="|followClick('__${follower.UserID}__')|"></a>
+					<div style="margin-left: 30%;margin-right:30%; border: 1px solid lightgray;" class="fitem">
+						<img th:src="${follower.Icon}" width="70px" height="70px" style="border-radius: 50%;">
+						<a th:text="${follower.UserID}" th:onclick="|followClick('__${follower.UserID}__')|" style="cursor: pointer;"></a>
 					</div>
 				</th:block>
 			</div>

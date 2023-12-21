@@ -144,14 +144,14 @@
 			<fieldset>
 				<div class="col-sm-7">
 					<label for="title"><b><span style="color: red;">*</span>タイトル：</b></label>
-					<input type="text" placeholder="タイトルを入力…" name="title" class="form-control" required>
+					<input type="text" placeholder="タイトルを入力…" name="title" class="form-control" maxlength="32" required>
 				</div>
 				<br>
 				<label for="genre"><b><span style="color: red;">*</span>ジャンル：</b></label>
 				<div class="col-sm-7">
 					<div class="input-group mb-3">
 						<input type="text" placeholder="カテゴリーを入力…" name="category" class="form-control"
-							aria-label="Text input with dropdown button" id="inputCategory" required>
+							aria-label="Text input with dropdown button" id="inputCategory" maxlength="255" required>
 						<button class="btn btn-outline-secondary dropdown-toggle" type="button"
 							data-bs-toggle="dropdown" aria-expanded="false">選択</button>
 						<ul class="dropdown-menu dropdown-menu-end">
@@ -169,7 +169,7 @@
 					<label for="exampleFormControlTextarea1" class="form-label"><b><span
 								style="color: red;">*</span>コメント：</b></label>
 					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"
-						placeholder="コメントを入力…" required style="resize: none;"></textarea>
+						placeholder="コメントを入力…" style="resize: none;" maxlength="255" required></textarea>
 				</div>
 				<br>
 				<label class="form-label"><b>レビュー数：</b></label>

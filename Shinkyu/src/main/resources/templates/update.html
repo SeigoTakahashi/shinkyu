@@ -151,7 +151,7 @@
 				<div class="col-sm-7">
 					<label for="title"><b><span style="color: red;">*</span>タイトル：</b></label>
 					<input type="text" placeholder="タイトルを入力…" name="title" class="form-control"
-						th:value="${target.Title}" required>
+						th:value="${target.Title}" maxlength="32" required>
 				</div>
 				<br>
 				<label for="genre"><b><span style="color: red;">*</span>ジャンル：</b></label>
@@ -159,7 +159,7 @@
 					<div class="input-group mb-3">
 						<input type="text" placeholder="カテゴリーを入力…" name="category" class="form-control"
 							aria-label="Text input with dropdown button" id="inputCategory"
-							th:value="${target.Category}" required>
+							th:value="${target.Category}" maxlength="255" required>
 						<button class="btn btn-outline-secondary dropdown-toggle" type="button"
 							data-bs-toggle="dropdown" aria-expanded="false">選択</button>
 						<ul class="dropdown-menu dropdown-menu-end">
@@ -177,7 +177,7 @@
 					<label for="exampleFormControlTextarea1" class="form-label"><b><span
 								style="color: red;">*</span>コメント：</b></label>
 					<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="comment"
-						placeholder="コメントを入力…" required style="resize: none;" th:text="${target.Comment}"></textarea>
+						placeholder="コメントを入力…" style="resize: none;" th:text="${target.Comment}" maxlength="255" required></textarea>
 				</div>
 				<br>
 				<label class="form-label"><b>レビュー数：</b></label>
